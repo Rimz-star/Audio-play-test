@@ -29,16 +29,19 @@
         </div>
     </div>
     <div class="album-cover">
-        <div class="box">
-            <img src="image/ngapainrepot.jpg" alt="Album Cover">
+        <div class="box album-box">
+            <div class="album-image">
+                <img src="image/ngapainrepot.jpg" alt="Album Cover">
+            </div>
+            <div class="separator"></div> <!-- Garis tipis pemisah -->
+            <div class="music-controls">
+                <audio id="audio-player" controls>
+                    <source src="audio/ngapainrepot.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <button id="play-pause-btn">Play</button>
+            </div>
         </div>
-    </div>
-    <div class="music-controls">
-        <audio id="audio-player" controls>
-            <source src="audio/ngapainrepot.mp3" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
-        <button id="play-pause-btn">Play</button>
     </div>
     <script src="script.js"></script>
 </body>
