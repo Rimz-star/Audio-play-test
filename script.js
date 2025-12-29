@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         isPlaying = !isPlaying;
     });
 
-    // Optional: Update button text based on audio state
     audioPlayer.addEventListener('ended', function() {
         playPauseBtn.textContent = 'Play';
         isPlaying = false;
