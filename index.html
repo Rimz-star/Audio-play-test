@@ -3,46 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>5 Containers with Images, Titles, and Audio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 200px; /* Lebar tetap, tinggi akan mengikuti aspect ratio 9:16 */
+            aspect-ratio: 9 / 16;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7); /* Efek glow cyan */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 1); /* Glow lebih kuat saat hover */
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 16px;
+            text-align: center;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        hr {
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+
+        audio {
+            display: none; /* Sembunyikan audio default, gunakan JS untuk kontrol */
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Music Player App</h1>
-    <div class="grid-container">
-        <div class="box">
-            <img src="images/song1.jpg" alt="Song 1">
-        </div>
-        <div class="box">
-            <img src="images/song2.jpg" alt="Song 2">
-        </div>
-        <div class="box">
-            <img src="images/song3.jpg" alt="Song 3">
-        </div>
-        <div class="box">
-            <img src="images/song4.jpg" alt="Song 4">
-        </div>
-        <div class="box">
-            <img src="images/song5.jpg" alt="Song 5">
-        </div>
-        <div class="box">
-            <img src="images/song6.jpg" alt="Song 6">
-        </div>
+    <div class="container">
+        <img src="https://via.placeholder.com/200x200?text=Image+1" alt="Image 1">
+        <h3>Judul Lagu 1</h3>
+        <hr>
+        <audio id="audio1" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio, ganti dengan URL lagu asli -->
+        <button onclick="togglePlay(1)">Play/Pause</button>
     </div>
-    <div class="album-cover">
-        <div class="box album-box">
-            <div class="album-image">
-                <img src="image/ngapainrepot.jpg" alt="Album Cover">
-            </div>
-            <div class="separator"></div> <!-- Garis tipis pemisah -->
-            <div class="music-controls">
-                <audio id="audio-player" controls>
-                    <source src="audio/ngapainrepot.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <button id="play-pause-btn">Play</button>
-            </div>
-        </div>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/200x200?text=Image+2" alt="Image 2">
+        <h3>Judul Lagu 2</h3>
+        <hr>
+        <audio id="audio2" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+        <button onclick="togglePlay(2)">Play/Pause</button>
     </div>
-    <script src="script.js"></script>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/200x200?text=Image+3" alt="Image 3">
+        <h3>Judul Lagu 3</h3>
+        <hr>
+        <audio id="audio3" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+        <button onclick="togglePlay(3)">Play/Pause</button>
+    </div>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/200x200?text=Image+4" alt="Image 4">
+        <h3>Judul Lagu 4</h3>
+        <hr>
+        <audio id="audio4" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+        <button onclick="togglePlay(4)">Play/Pause</button>
+    </div>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/200x200?text=Image+5" alt="Image 5">
+        <h3>Judul Lagu 5</h3>
+        <hr>
+        <audio id="audio5" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+        <button onclick="togglePlay(5)">Play/Pause</button>
+    </div>
+
+    <script>
+        function togglePlay(id) {
+            const audio = document.getElementById('audio' + id);
+            const button = audio.nextElementSibling; // Tombol setelah audio
+
+            if (audio.paused) {
+                audio.play();
+                button.textContent = 'Pause';
+            } else {
+                audio.pause();
+                button.textContent = 'Play';
+            }
+        }
+    </script>
 </body>
 </html>
