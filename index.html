@@ -28,11 +28,11 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             text-align: center;
-            color: #00ffff; /* Warna neon cyan gelap */
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; /* Efek glow neon */
+            color: #fff; /* Warna putih untuk kontras lebih rendah */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.5); /* Bayangan hitam untuk kontras, glow putih halus */
             white-space: nowrap;
             overflow: hidden;
-            border-right: 3px solid #00ffff; /* Kursor typing */
+            border-right: 3px solid #fff; /* Kursor typing putih */
             width: 0;
             animation: typing 3s steps(30, end) forwards, blink 1s infinite; /* Animasi typing dan blink kursor */
         }
@@ -44,18 +44,18 @@
 
         @keyframes blink {
             from, to { border-color: transparent; }
-            50% { border-color: #00ffff; }
+            50% { border-color: #fff; }
         }
 
         .description {
             font-size: 1.2em;
             margin-bottom: 30px;
             text-align: center;
-            color: #ff00ff; /* Warna neon magenta gelap */
-            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; /* Efek glow neon */
+            color: #fff; /* Warna putih untuk kontras lebih rendah */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.5); /* Bayangan hitam untuk kontras, glow putih halus */
             white-space: nowrap;
             overflow: hidden;
-            border-right: 3px solid #ff00ff; /* Kursor typing */
+            border-right: 3px solid #fff; /* Kursor typing putih */
             width: 0;
             animation: typingDesc 5s steps(60, end) forwards 3s, blinkDesc 1s infinite 8s; /* Animasi typing dimulai setelah judul, dan blink */
         }
@@ -67,7 +67,7 @@
 
         @keyframes blinkDesc {
             from, to { border-color: transparent; }
-            50% { border-color: #ff00ff; }
+            50% { border-color: #fff; }
         }
 
         .containers {
