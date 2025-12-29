@@ -28,17 +28,46 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             text-align: center;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #00ffff; /* Warna neon cyan gelap */
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; /* Efek glow neon */
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #00ffff; /* Kursor typing */
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 1s infinite; /* Animasi typing dan blink kursor */
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ffff; }
         }
 
         .description {
             font-size: 1.2em;
             margin-bottom: 30px;
             text-align: center;
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
+            color: #ff00ff; /* Warna neon magenta gelap */
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; /* Efek glow neon */
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #ff00ff; /* Kursor typing */
+            width: 0;
+            animation: typingDesc 5s steps(60, end) forwards 3s, blinkDesc 1s infinite 8s; /* Animasi typing dimulai setelah judul, dan blink */
+        }
+
+        @keyframes typingDesc {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blinkDesc {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff00ff; }
         }
 
         .containers {
