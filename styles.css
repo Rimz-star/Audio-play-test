@@ -31,14 +31,14 @@ h1 {
     font-weight: bold;
     border-radius: 10px;
     transition: transform 0.3s;
-    overflow: hidden; /* Ensure images don't overflow */
+    overflow: hidden;
 }
 
 .box img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Crop image to fit 1:1 without distortion */
-    border-radius: 8px; /* Match box border-radius */
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .box:hover {
@@ -51,16 +51,36 @@ h1 {
     margin-bottom: 20px;
 }
 
+.album-box {
+    flex-direction: column; /* Layout vertikal untuk gambar dan kontrol */
+    justify-content: space-between; /* Gambar di atas, kontrol di bawah */
+    padding: 0; /* Hapus padding default agar fit */
+}
+
+.album-image {
+    flex: 1; /* Gambar mengambil ruang atas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.separator {
+    height: 1px; /* Garis tipis horizontal */
+    background-color: white;
+    width: 80%; /* Lebar garis, bisa disesuaikan */
+    margin: 5px auto; /* Margin atas/bawah untuk pemisah */
+}
+
 .music-controls {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    max-width: 400px;
-    margin: 0 auto;
+    padding: 10px; /* Padding kecil untuk kontrol */
+    background-color: rgba(0, 0, 0, 0.3); /* Background transparan untuk kontrol */
+    border-radius: 0 0 10px 10px; /* Border-radius bawah saja */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #audio-player {
@@ -68,13 +88,13 @@ h1 {
 }
 
 #play-pause-btn {
-    padding: 10px 20px;
+    padding: 8px 16px; /* Ukuran lebih kecil agar fit di box */
     background-color: #4ecdc4;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #play-pause-btn:hover {
@@ -91,11 +111,19 @@ h1 {
         width: 80px;
         height: 80px;
     }
-    .album-cover {
-        margin-bottom: 15px;
+    .album-box {
+        width: 80px;
+        height: 80px;
+    }
+    .album-image img {
+        width: 100%;
+        height: 100%;
     }
     .music-controls {
-        flex-direction: column;
-        gap: 15px;
+        padding: 5px;
+    }
+    #play-pause-btn {
+        padding: 6px 12px;
+        font-size: 12px;
     }
 }
