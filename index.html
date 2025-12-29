@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Music Player App</h1>
+    <div class="grid-container">
+        <div class="box">Song 1</div>
+        <div class="box">Song 2</div>
+        <div class="box">Song 3</div>
+        <div class="box">Song 4</div>
+        <div class="box">Song 5</div>
+        <div class="box">Song 6</div>
+    </div>
+    <div class="music-controls">
+        <audio id="audio-player" controls>
+            <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav"> <!-- Dummy audio file; replace with actual song URL -->
+            Your browser does not support the audio element.
+        </audio>
+        <button id="play-pause-btn">Play</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
