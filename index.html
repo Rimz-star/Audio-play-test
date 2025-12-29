@@ -8,12 +8,45 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .description {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+        }
+
+        .containers {
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 20px;
-            background-color: #f0f0f0;
         }
 
         .container {
@@ -74,44 +107,49 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="image/ngapainrepot.jpg" alt="Image 1">
-        <h3>Judul Lagu 1</h3>
-        <hr>
-        <audio id="audio1" src="audio/ngapainrepot.mp3"></audio> <!-- Placeholder audio, ganti dengan URL lagu asli -->
-        <button onclick="togglePlay(1)">Play/Pause</button>
-    </div>
+    <h1>Selamat Datang di Koleksi Lagu</h1>
+    <p class="description">Nikmati koleksi lagu favorit Anda dengan gambar dan kontrol audio yang mudah. Klik tombol Play/Pause untuk mendengarkan!</p>
+    
+    <div class="containers">
+        <div class="container">
+            <img src="image/ngapainrepot.jpg" alt="Image 1">
+            <h3>Judul Lagu 1</h3>
+            <hr>
+            <audio id="audio1" src="audio/ngapainrepot.mp3"></audio> <!-- Placeholder audio, ganti dengan URL lagu asli -->
+            <button onclick="togglePlay(1)">Play/Pause</button>
+        </div>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/200x200?text=Image+2" alt="Image 2">
-        <h3>Judul Lagu 2</h3>
-        <hr>
-        <audio id="audio2" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
-        <button onclick="togglePlay(2)">Play/Pause</button>
-    </div>
+        <div class="container">
+            <img src="https://via.placeholder.com/200x200?text=Image+2" alt="Image 2">
+            <h3>Judul Lagu 2</h3>
+            <hr>
+            <audio id="audio2" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+            <button onclick="togglePlay(2)">Play/Pause</button>
+        </div>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/200x200?text=Image+3" alt="Image 3">
-        <h3>Judul Lagu 3</h3>
-        <hr>
-        <audio id="audio3" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
-        <button onclick="togglePlay(3)">Play/Pause</button>
-    </div>
+        <div class="container">
+            <img src="https://via.placeholder.com/200x200?text=Image+3" alt="Image 3">
+            <h3>Judul Lagu 3</h3>
+            <hr>
+            <audio id="audio3" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+            <button onclick="togglePlay(3)">Play/Pause</button>
+        </div>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/200x200?text=Image+4" alt="Image 4">
-        <h3>Judul Lagu 4</h3>
-        <hr>
-        <audio id="audio4" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
-        <button onclick="togglePlay(4)">Play/Pause</button>
-    </div>
+        <div class="container">
+            <img src="https://via.placeholder.com/200x200?text=Image+4" alt="Image 4">
+            <h3>Judul Lagu 4</h3>
+            <hr>
+            <audio id="audio4" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+            <button onclick="togglePlay(4)">Play/Pause</button>
+        </div>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/200x200?text=Image+5" alt="Image 5">
-        <h3>Judul Lagu 5</h3>
-        <hr>
-        <audio id="audio5" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
-        <button onclick="togglePlay(5)">Play/Pause</button>
+        <div class="container">
+            <img src="https://via.placeholder.com/200x200?text=Image+5" alt="Image 5">
+            <h3>Judul Lagu 5</h3>
+            <hr>
+            <audio id="audio5" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio> <!-- Placeholder audio -->
+            <button onclick="togglePlay(5)">Play/Pause</button>
+        </div>
     </div>
 
     <script>
