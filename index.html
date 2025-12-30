@@ -17,24 +17,13 @@ body{
     color:#e0ffff;
     text-align:center;
 }
-
 @keyframes bg{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
-
-h1{
-    font-size:2.6em;
-    text-shadow:0 0 12px cyan;
-}
-
-.desc{
-    max-width:720px;
-    margin:20px auto 40px;
-    font-size:1.1em;
-    color:#ffd6ff;
-}
+h1{text-shadow:0 0 12px cyan;font-size:2.6em}
+.desc{max-width:720px;margin:20px auto 40px;color:#ffd6ff}
 
 .audio-test{
     display:flex;
@@ -42,7 +31,6 @@ h1{
     justify-content:center;
     flex-wrap:wrap;
 }
-
 .card{
     width:220px;
     background:rgba(255,255,255,.08);
@@ -50,75 +38,76 @@ h1{
     padding:15px;
     box-shadow:0 0 20px rgba(0,255,255,.4);
 }
-
 .card img{
     width:100%;
     aspect-ratio:1/1;
     object-fit:cover;
     border-radius:10px;
 }
+.card p{font-size:.9em;color:#cfffff}
 
-.card h3{margin:12px 0 6px}
-
-.card p{
-    font-size:.9em;
-    color:#cfffff;
-}
-
-.nav{
-    margin-top:50px;
-    display:flex;
-    gap:15px;
-    justify-content:center;
-}
-
-.nav a{
-    padding:10px 18px;
-    border-radius:20px;
-    text-decoration:none;
+/* hamburger */
+.menu-btn{
+    position:fixed;top:20px;left:20px;
+    width:42px;height:42px;
     background:rgba(255,255,255,.2);
-    color:#fff;
-    box-shadow:0 0 10px rgba(255,255,255,.4);
+    border-radius:12px;
+    display:flex;flex-direction:column;
+    justify-content:center;gap:6px;
+    padding:10px;cursor:pointer;
 }
+.menu-btn span{height:3px;background:#fff;border-radius:4px}
+.menu{
+    position:fixed;top:70px;left:20px;
+    display:none;flex-direction:column;
+    gap:10px;padding:15px;
+    background:rgba(0,0,0,.6);
+    border-radius:14px;
+}
+.menu a{color:#fff;text-decoration:none}
+.menu.show{display:flex}
 </style>
 </head>
 
 <body>
 
+<div class="menu-btn" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
+
+<div class="menu" id="menu">
+<a href="index.html">halaman 1</a>
+<a href="halaman2.html">halaman 2</a>
+<a href="halaman3.html">halaman 3</a>
+<a href="halaman4.html">tentang kami</a>
+</div>
+
 <h1>audio play test</h1>
 <p class="desc">
-halaman ini berfungsi sebagai pengujian visual dan konsep audio player.  
-setiap kartu menampilkan ilustrasi 1:1 yang merepresentasikan jenis audio  
-sebelum digunakan pada koleksi lagu utama dengan animasi neon.
+halaman utama untuk uji tampilan dan konsep audio player  
+menggunakan kartu visual rasio 1:1 sebelum masuk koleksi lagu
 </p>
 
 <div class="audio-test">
-
-    <div class="card">
-        <img src="image/test1.jpg">
-        <h3>audio preview 1</h3>
-        <p>uji tampilan cover dan penempatan judul lagu</p>
-    </div>
-
-    <div class="card">
-        <img src="image/test2.jpg">
-        <h3>audio preview 2</h3>
-        <p>simulasi visual sebelum audio diputar</p>
-    </div>
-
-    <div class="card">
-        <img src="image/test3.jpg">
-        <h3>audio preview 3</h3>
-        <p>penyesuaian ukuran dan proporsi 1:1</p>
-    </div>
-
+<div class="card">
+<img src="image/test1.jpg">
+<p>preview audio 1</p>
+</div>
+<div class="card">
+<img src="image/test2.jpg">
+<p>preview audio 2</p>
+</div>
+<div class="card">
+<img src="image/test3.jpg">
+<p>preview audio 3</p>
+</div>
 </div>
 
-<div class="nav">
-    <a href="index.html">home</a>
-    <a href="koleksi.html">koleksi lagu</a>
-    <a href="tentang.html">tentang kami</a>
-</div>
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>
