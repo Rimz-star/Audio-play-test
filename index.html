@@ -30,7 +30,7 @@ h1{
 }
 
 .desc{
-    max-width:700px;
+    max-width:720px;
     margin:20px auto 40px;
     font-size:1.1em;
     color:#ffd6ff;
@@ -51,18 +51,18 @@ h1{
     box-shadow:0 0 20px rgba(0,255,255,.4);
 }
 
-.card h3{margin:10px 0}
+.card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:10px;
+}
 
-button{
-    margin-top:10px;
-    padding:10px 18px;
-    border:none;
-    border-radius:20px;
-    cursor:pointer;
-    background:#00c6ff;
-    color:#000;
-    font-weight:bold;
-    box-shadow:0 0 12px #00c6ff;
+.card h3{margin:12px 0 6px}
+
+.card p{
+    font-size:.9em;
+    color:#cfffff;
 }
 
 .nav{
@@ -87,30 +87,37 @@ button{
 
 <h1>audio play test</h1>
 <p class="desc">
-halaman ini dibuat untuk menguji fitur audio play berbasis html css dan javascript.  
-di sini kamu bisa ngetes pemutaran audio, respon tombol play, dan kestabilan suara  
-sebelum masuk ke koleksi lagu utama dengan tampilan neon modern.
+halaman ini berfungsi sebagai pengujian visual dan konsep audio player.  
+setiap kartu menampilkan ilustrasi 1:1 yang merepresentasikan jenis audio  
+sebelum digunakan pada koleksi lagu utama dengan animasi neon.
 </p>
 
 <div class="audio-test">
+
     <div class="card">
-        <h3>audio test 1</h3>
-        <audio controls src="audio/test1.mp3"></audio>
+        <img src="image/test1.jpg">
+        <h3>audio preview 1</h3>
+        <p>uji tampilan cover dan penempatan judul lagu</p>
     </div>
+
     <div class="card">
-        <h3>audio test 2</h3>
-        <audio controls src="audio/test2.mp3"></audio>
+        <img src="image/test2.jpg">
+        <h3>audio preview 2</h3>
+        <p>simulasi visual sebelum audio diputar</p>
     </div>
+
     <div class="card">
-        <h3>audio test 3</h3>
-        <audio controls src="audio/test3.mp3"></audio>
+        <img src="image/test3.jpg">
+        <h3>audio preview 3</h3>
+        <p>penyesuaian ukuran dan proporsi 1:1</p>
     </div>
+
 </div>
 
 <div class="nav">
     <a href="index.html">home</a>
     <a href="koleksi.html">koleksi lagu</a>
-    <a href="tentang.html">tentang</a>
+    <a href="tentang.html">tentang kami</a>
 </div>
 
 </body>
