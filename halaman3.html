@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>koleksi lagu</title>
+
+<style>
+/* ===== base + aurora ===== */
+body{
+    font-family:arial,sans-serif;
+    margin:0;
+    padding:20px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,255,200,.25), transparent 40%),
+        radial-gradient(circle at 80% 40%, rgba(0,120,255,.25), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(180,0,255,.25), transparent 40%),
+        #050510;
+    animation:aurora 45s ease-in-out infinite alternate;
+    color:#e0ffff;
+}
+@keyframes aurora{
+    0%{
+        background-position:
+        20% 30%,
+        80% 40%,
+        50% 80%,
+        center;
+    }
+    100%{
+        background-position:
+        30% 40%,
+        70% 30%,
+        60% 70%,
+        center;
+    }
+}
+
+/* ===== hamburger menu ===== */
+.menu-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    width:42px;
+    height:42px;
+    background:rgba(255,255,255,.25);
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    padding:10px;
+    cursor:pointer;
+    z-index:999;
+}
+.menu-btn span{
+    height:3px;
+    background:#fff;
+    border-radius:4px;
+}
+.menu{
+    position:fixed;
+    top:70px;
+    left:15px;
+    display:none;
+    flex-direction:column;
+    gap:10px;
+    padding:15px;
+    background:rgba(0,0,0,.6);
+    border-radius:14px;
+    backdrop-filter:blur(10px);
+    z-index:999;
+}
+.menu a{
+    color:#fff;
+    text-decoration:none;
+}
+.menu.show{display:flex}
+
+/* ===== theme toggle ===== */
+.theme-toggle{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:55px;
+    height:28px;
+    background:rgba(255,255,255,.25);
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6px;
+    cursor:pointer;
+    z-index:999;
+}
+body.light{
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,180,255,.25), transparent 40%),
+        radial-gradient(circle at 80% 40%, rgba(255,180,0,.25), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(255,0,180,.25), transparent 40%),
+        #f4f6fb;
+    color:#222;
+}
+
+/* ===== animasi masuk ===== */
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    animation:fadeUp .8s ease forwards;
+}
+.fade-delay-1{animation-delay:.2s}
+.fade-delay-2{animation-delay:.4s}
+.fade-delay-3{animation-delay:.6s}
+.fade-delay-4{animation-delay:.8s}
+@keyframes fadeUp{
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== title ===== */
+h1{
+    margin-top:80px;
+    text-shadow:0 0 10px cyan;
+}
+.description{
+    color:#ffd6ff;
+    margin-bottom:30px;
+}
+
+/* ===== lagu ===== */
+.containers{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+.container{
+    width:200px;
+    background:#fff;
+    color:#000;
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    box-shadow:0 0 20px rgba(0,255,255,.6);
+}
+.container img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:8px;
+}
+audio{display:none}
+
+/* ===== play button ===== */
+button{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#007bff;
+    border:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.play-icon{
+    width:0;height:0;
+    border-left:14px solid white;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+}
+
+/* ===== equalizer ===== */
+.bars{
+    display:flex;
+    gap:4px;
+    height:22px;
+    align-items:flex-end;
+}
+.bars div{
+    width:4px;
+    height:6px;
+    background:white;
+    animation:wave .9s infinite;
+}
+@keyframes wave{
+    0%{height:6px}
+    50%{height:22px}
+    100%{height:6px}
+}
+
+/* ===== pagination ===== */
+.pagination{
+    margin:30px 0;
+    display:flex;
+    gap:10px;
+}
+.pagination button{
+    padding:6px 14px;
+    border-radius:8px;
+    border:none;
+    background:rgba(255,255,255,.4);
+    cursor:pointer;
+}
+.pagination button.active{
+    background:#007bff;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
+
+<div class="menu" id="menu">
+<a href="#">menu awal</a>
+<a href="#">lagu galau</a>
+<a href="#">lagu dj</a>
+<a href="#">tentang kami</a>
+</div>
+
+<div class="theme-toggle" onclick="toggleTheme()">
+<span>☀</span><span>🌙</span>
+</div>
+
+<h1 id="typing-title" class="fade-up"></h1>
+<p id="typing-desc" class="description fade-up fade-delay-1"></p>
+
+<div class="containers fade-up fade-delay-2" id="songList">
+
+<div class="container song">
+<img src="image/lagu1.jpg">
+<h3>judul lagu 1</h3>
+<audio id="audio1" src="audio/lagu1.mp3"></audio>
+<button onclick="togglePlay(1)"><div class="play-icon"></div></button>
+</div>
+
+<div class="container song">
+<img src="image/lagu2.jpg">
+<h3>judul lagu 2</h3>
+<audio id="audio2" src="audio/lagu2.mp3"></audio>
+<button onclick="togglePlay(2)"><div class="play-icon"></div></button>
+</div>
+
+<div class="container song">
+<img src="image/lagu3.jpg">
+<h3>judul lagu 3</h3>
+<audio id="audio3" src="audio/lagu3.mp3"></audio>
+<button onclick="togglePlay(3)"><div class="play-icon"></div></button>
+</div>
+
+<div class="container song">
+<img src="image/lagu4.jpg">
+<h3>judul lagu 4</h3>
+<audio id="audio4" src="audio/lagu4.mp3"></audio>
+<button onclick="togglePlay(4)"><div class="play-icon"></div></button>
+</div>
+
+<div class="container song">
+<img src="image/lagu5.jpg">
+<h3>judul lagu 5</h3>
+<audio id="audio5" src="audio/lagu5.mp3"></audio>
+<button onclick="togglePlay(5)"><div class="play-icon"></div></button>
+</div>
+
+</div>
+
+<div class="pagination" id="pagination"></div>
+
+<script>
+/* typing */
+function typingText(el,text,speed,delay=0){
+    setTimeout(()=>{
+        let i=0;
+        const int=setInterval(()=>{
+            el.innerHTML+=text.charAt(i);
+            i++;
+            if(i>=text.length) clearInterval(int);
+        },speed);
+    },delay);
+}
+typingText(
+document.getElementById("typing-title"),
+"selamat datang di koleksi lagu",
+70
+);
+typingText(
+document.getElementById("typing-desc"),
+"nikmati lagu favorit dengan tampilan aurora gelap",
+35,
+1500
+);
+
+/* menu & theme */
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+function toggleTheme(){
+document.body.classList.toggle("light");
+}
+
+/* audio */
+let currentAudio=null;
+let currentButton=null;
+let beatInterval=null;
+
+function togglePlay(id){
+const audio=document.getElementById("audio"+id);
+const button=audio.nextElementSibling;
+
+if(currentAudio && currentAudio!==audio){
+currentAudio.pause();
+currentAudio.currentTime=0;
+currentButton.innerHTML='<div class="play-icon"></div>';
+clearInterval(beatInterval);
+}
+
+if(audio.paused){
+audio.play();
+button.innerHTML='<div class="bars"><div></div><div></div><div></div><div></div></div>';
+currentAudio=audio;
+currentButton=button;
+beatInterval=setInterval(()=>{
+button.querySelectorAll(".bars div").forEach(b=>{
+b.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
+});
+},120);
+audio.onended=()=>{
+button.innerHTML='<div class="play-icon"></div>';
+clearInterval(beatInterval);
+};
+}else{
+audio.pause();
+audio.currentTime=0;
+button.innerHTML='<div class="play-icon"></div>';
+clearInterval(beatInterval);
+}
+}
+
+/* pagination */
+const songs=document.querySelectorAll(".song");
+const perPage=3;
+const totalPage=Math.ceil(songs.length/perPage);
+const pagination=document.getElementById("pagination");
+
+function showPage(page){
+songs.forEach((s,i)=>{
+s.style.display=(i>=(page-1)*perPage && i<page*perPage)?"flex":"none";
+});
+document.querySelectorAll(".pagination button")
+.forEach((b,i)=>b.classList.toggle("active",i+1===page));
+}
+
+for(let i=1;i<=totalPage;i++){
+const btn=document.createElement("button");
+btn.innerText=i;
+btn.onclick=()=>showPage(i);
+pagination.appendChild(btn);
+}
+showPage(1);
+</script>
+
+</body>
+</html>
