@@ -113,29 +113,156 @@ hr{width:80%}
 
 audio{display:none}
 
-/* ===== button ===== */
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>koleksi lagu</title>
+
+<style>
+body{
+    font-family:arial,sans-serif;
+    margin:0;
+    padding:20px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:linear-gradient(45deg,#ff6b6b,#4ecdc4,#45b7d1,#f9ca24);
+    background-size:400% 400%;
+    animation:bg 10s ease infinite;
+}
+@keyframes bg{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* menu */
+.menu-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    width:42px;
+    height:42px;
+    background:rgba(255,255,255,.25);
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    padding:10px;
+    cursor:pointer;
+    z-index:999;
+}
+.menu-btn span{
+    height:3px;
+    background:#fff;
+    border-radius:4px;
+}
+.menu{
+    position:fixed;
+    top:70px;
+    left:15px;
+    display:none;
+    flex-direction:column;
+    gap:10px;
+    padding:15px;
+    background:rgba(0,0,0,.6);
+    border-radius:14px;
+    z-index:999;
+}
+.menu a{
+    color:#fff;
+    text-decoration:none;
+}
+.menu.show{display:flex}
+
+/* theme */
+.theme-toggle{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:55px;
+    height:28px;
+    background:rgba(255,255,255,.25);
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6px;
+    cursor:pointer;
+    z-index:999;
+}
+body.light{
+    background:linear-gradient(45deg,#f8f9fa,#e3f2fd,#e0f7fa,#fffde7);
+}
+
+/* animasi */
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    animation:fadeUp .8s ease forwards;
+}
+.fade-delay-1{animation-delay:.2s}
+.fade-delay-2{animation-delay:.4s}
+.fade-delay-3{animation-delay:.6s}
+.fade-delay-4{animation-delay:.8s}
+@keyframes fadeUp{
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* title */
+h1{
+    margin-top:80px;
+    color:#e0ffff;
+    text-shadow:0 0 10px cyan;
+}
+.description{
+    color:#ffd6ff;
+    margin-bottom:30px;
+}
+
+/* lagu */
+.containers{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+.container{
+    width:200px;
+    background:#fff;
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    box-shadow:0 0 20px rgba(0,255,255,.6);
+}
+.container img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:8px;
+}
+audio{display:none}
+
+/* play button */
 button{
     width:48px;
     height:48px;
     border-radius:50%;
-    background:rgba(0,123,255,.9);
+    background:#007bff;
     border:none;
     cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
-    box-shadow:0 0 15px rgba(0,123,255,.8);
-    transition:.3s;
 }
-button:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 25px rgba(0,123,255,1);
-}
-
-/* icons */
 .play-icon{
-    width:0;
-    height:0;
+    width:0;height:0;
     border-left:14px solid white;
     border-top:8px solid transparent;
     border-bottom:8px solid transparent;
@@ -144,119 +271,198 @@ button:hover{
 /* equalizer */
 .bars{
     display:flex;
-    align-items:flex-end;
     gap:4px;
     height:22px;
+    align-items:flex-end;
 }
 .bars div{
     width:4px;
     height:6px;
     background:white;
-    animation:wave .9s ease-in-out infinite;
-    border-radius:2px;
+    animation:wave .9s infinite;
 }
-.bars div:nth-child(2){animation-delay:.1s}
-.bars div:nth-child(3){animation-delay:.2s}
-.bars div:nth-child(4){animation-delay:.3s}
-
 @keyframes wave{
     0%{height:6px}
     50%{height:22px}
     100%{height:6px}
 }
 
-/* ===== light mode ===== */
-body.light{
-    background:linear-gradient(45deg,#f8f9fa,#e3f2fd,#e0f7fa,#fffde7,#fff3e0);
+/* pagination */
+.pagination{
+    margin:30px 0;
+    display:flex;
+    gap:10px;
 }
-body.light h1{
-    color:#0066ff;
-    text-shadow:0 0 6px rgba(0,102,255,.5);
+.pagination button{
+    padding:6px 14px;
+    border-radius:8px;
+    border:none;
+    background:rgba(255,255,255,.4);
+    cursor:pointer;
 }
-body.light .description{
-    color:#8e24aa;
-    text-shadow:0 0 6px rgba(142,36,170,.4);
-}
-body.light .container{
-    box-shadow:0 0 15px rgba(0,123,255,.3);
+.pagination button.active{
+    background:#007bff;
+    color:#fff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="theme-toggle" onclick="toggleTheme()">
-    <span class="sun">☀</span>
-    <span class="moon">🌙</span>
+<div class="menu-btn" onclick="toggleMenu()">
+<span></span><span></span><span></span>
 </div>
 
-<h1>selamat datang di koleksi lagu</h1>
-<p class="description">nikmati lagu favorit dengan tampilan neon modern</p>
+<div class="menu" id="menu">
+<a href="#">menu awal</a>
+<a href="#">lagu galau</a>
+<a href="#">lagu dj</a>
+<a href="#">tentang kami</a>
+</div>
 
-<div class="containers">
+<div class="theme-toggle" onclick="toggleTheme()">
+<span>☀</span><span>🌙</span>
+</div>
 
-<div class="container">
+<h1 id="typing-title" class="fade-up"></h1>
+<p id="typing-desc" class="description fade-up fade-delay-1"></p>
+
+<div class="containers fade-up fade-delay-2" id="songList">
+
+<div class="container song">
 <img src="image/ngapainrepot.jpg">
 <h3>judul lagu 1</h3>
-<hr>
 <audio id="audio1" src="audio/ngapainrepot.mp3"></audio>
 <button onclick="togglePlay(1)"><div class="play-icon"></div></button>
 </div>
 
-<div class="container">
-<img src="https://via.placeholder.com/200">
+<div class="container song">
+<img src="image/lagu2.jpg">
 <h3>judul lagu 2</h3>
-<hr>
 <audio id="audio2" src="audio/lagu2.mp3"></audio>
 <button onclick="togglePlay(2)"><div class="play-icon"></div></button>
 </div>
 
+<div class="container song">
+<img src="image/lagu3.jpg">
+<h3>judul lagu 3</h3>
+<audio id="audio3" src="audio/lagu3.mp3"></audio>
+<button onclick="togglePlay(3)"><div class="play-icon"></div></button>
 </div>
 
+<div class="container song">
+<img src="image/lagu4.jpg">
+<h3>judul lagu 4</h3>
+<audio id="audio4" src="audio/lagu4.mp3"></audio>
+<button onclick="togglePlay(4)"><div class="play-icon"></div></button>
+</div>
+
+<div class="container song">
+<img src="image/lagu5.jpg">
+<h3>judul lagu 5</h3>
+<audio id="audio5" src="audio/lagu5.mp3"></audio>
+<button onclick="togglePlay(5)"><div class="play-icon"></div></button>
+</div>
+
+</div>
+
+<div class="pagination" id="pagination"></div>
+
 <script>
+/* typing */
+function typingText(el,text,speed,delay=0){
+    setTimeout(()=>{
+        let i=0;
+        const int=setInterval(()=>{
+            el.innerHTML+=text.charAt(i);
+            i++;
+            if(i>=text.length) clearInterval(int);
+        },speed);
+    },delay);
+}
+typingText(
+document.getElementById("typing-title"),
+"selamat datang di koleksi lagu",
+70
+);
+typingText(
+document.getElementById("typing-desc"),
+"nikmati lagu favorit dengan tampilan neon modern",
+35,
+1500
+);
+
+/* menu & theme */
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+function toggleTheme(){
+document.body.classList.toggle("light");
+}
+
+/* audio */
 let currentAudio=null;
 let currentButton=null;
 let beatInterval=null;
 
 function togglePlay(id){
-    const audio=document.getElementById("audio"+id);
-    const button=audio.nextElementSibling;
+const audio=document.getElementById("audio"+id);
+const button=audio.nextElementSibling;
 
-    if(currentAudio && currentAudio!==audio){
-        currentAudio.pause();
-        currentAudio.currentTime=0;
-        currentButton.innerHTML='<div class="play-icon"></div>';
-        clearInterval(beatInterval);
-    }
-
-    if(audio.paused){
-        audio.play();
-        button.innerHTML='<div class="bars"><div></div><div></div><div></div><div></div></div>';
-        currentAudio=audio;
-        currentButton=button;
-
-        beatInterval=setInterval(()=>{
-            button.querySelectorAll(".bars div").forEach(bar=>{
-                bar.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
-            });
-        },120);
-
-        audio.onended=()=>{
-            button.innerHTML='<div class="play-icon"></div>';
-            clearInterval(beatInterval);
-        };
-    }else{
-        audio.pause();
-        audio.currentTime=0;
-        button.innerHTML='<div class="play-icon"></div>';
-        clearInterval(beatInterval);
-    }
+if(currentAudio && currentAudio!==audio){
+currentAudio.pause();
+currentAudio.currentTime=0;
+currentButton.innerHTML='<div class="play-icon"></div>';
+clearInterval(beatInterval);
 }
 
-function toggleTheme(){
-    document.body.classList.toggle("light");
+if(audio.paused){
+audio.play();
+button.innerHTML='<div class="bars"><div></div><div></div><div></div><div></div></div>';
+currentAudio=audio;
+currentButton=button;
+beatInterval=setInterval(()=>{
+button.querySelectorAll(".bars div").forEach(b=>{
+b.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
+});
+},120);
+audio.onended=()=>{
+button.innerHTML='<div class="play-icon"></div>';
+clearInterval(beatInterval);
+};
+}else{
+audio.pause();
+audio.currentTime=0;
+button.innerHTML='<div class="play-icon"></div>';
+clearInterval(beatInterval);
 }
+}
+
+/* pagination */
+const songs=document.querySelectorAll(".song");
+const perPage=3;
+let currentPage=1;
+const totalPage=Math.ceil(songs.length/perPage);
+const pagination=document.getElementById("pagination");
+
+function showPage(page){
+currentPage=page;
+songs.forEach((s,i)=>{
+s.style.display=(i>=(page-1)*perPage && i<page*perPage)?"flex":"none";
+});
+document.querySelectorAll(".pagination button")
+.forEach((b,i)=>b.classList.toggle("active",i+1===page));
+}
+
+for(let i=1;i<=totalPage;i++){
+const btn=document.createElement("button");
+btn.innerText=i;
+btn.onclick=()=>showPage(i);
+pagination.appendChild(btn);
+}
+showPage(1);
 </script>
 
 </body>
 </html>
+
