@@ -3,260 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>koleksi lagu</title>
+<title>audio play test</title>
 
 <style>
-/* ===== base ===== */
-body {
-    font-family: arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    min-height: 100vh;
-    background: linear-gradient(45deg,#ff6b6b,#4ecdc4,#45b7d1,#f9ca24,#f0932b);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-    transition: background .6s,color .4s;
+body{
+    font-family:arial,sans-serif;
+    min-height:100vh;
+    margin:0;
+    padding:30px;
+    background:linear-gradient(45deg,#1e1e2f,#2b5876,#4e4376);
+    background-size:400% 400%;
+    animation:bg 10s ease infinite;
+    color:#e0ffff;
+    text-align:center;
 }
 
-@keyframes gradientShift {
+@keyframes bg{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
 
-/* ===== theme toggle ===== */
-.theme-toggle{
-    position:fixed;
-    top:15px;
-    right:15px;
-    width:55px;
-    height:28px;
-    background:rgba(255,255,255,.25);
-    border-radius:50px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 6px;
-    backdrop-filter:blur(10px);
-    z-index:999;
-}
-.theme-toggle span{
-    font-size:14px;
-    transition:.3s;
-}
-body.light .moon{opacity:0;transform:scale(0)}
-body:not(.light) .sun{opacity:0;transform:scale(0)}
-
-/* ===== title ===== */
 h1{
-    font-size:2.4em;
-    margin-bottom:10px;
-    color:#e0ffff;
-    text-shadow:0 0 6px rgba(0,255,255,.6),0 0 14px rgba(0,255,255,.4);
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:3px solid rgba(0,255,255,.7);
-    width:0;
-    animation:typing 3s steps(30,end) forwards,blink 1s infinite;
+    font-size:2.6em;
+    text-shadow:0 0 12px cyan;
 }
 
-.description{
+.desc{
+    max-width:700px;
+    margin:20px auto 40px;
     font-size:1.1em;
-    margin-bottom:30px;
     color:#ffd6ff;
-    text-shadow:0 0 6px rgba(255,0,255,.5),0 0 12px rgba(255,0,255,.4);
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:3px solid rgba(255,0,255,.6);
-    width:0;
-    animation:typingDesc 5s steps(60,end) forwards 3s,blinkDesc 1s infinite 8s;
 }
 
-@keyframes typing{to{width:100%}}
-@keyframes typingDesc{to{width:100%}}
-@keyframes blink{50%{border-color:transparent}}
-@keyframes blinkDesc{50%{border-color:transparent}}
-
-/* ===== containers ===== */
-.containers{
+.audio-test{
     display:flex;
-    flex-wrap:wrap;
     gap:20px;
     justify-content:center;
+    flex-wrap:wrap;
 }
 
-.container{
-    width:200px;
-    aspect-ratio:9/16;
-    background:#fff;
-    border-radius:12px;
-    padding:10px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    border:2px solid rgba(0,255,255,.4);
-    box-shadow:0 0 20px rgba(0,255,255,.6);
+.card{
+    width:220px;
+    background:rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:15px;
+    box-shadow:0 0 20px rgba(0,255,255,.4);
 }
 
-img{
-    width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-    border-radius:8px;
-}
+.card h3{margin:10px 0}
 
-h3{margin:10px 0}
-hr{width:80%}
-
-audio{display:none}
-
-/* ===== button ===== */
 button{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    background:rgba(0,123,255,.9);
+    margin-top:10px;
+    padding:10px 18px;
     border:none;
+    border-radius:20px;
     cursor:pointer;
+    background:#00c6ff;
+    color:#000;
+    font-weight:bold;
+    box-shadow:0 0 12px #00c6ff;
+}
+
+.nav{
+    margin-top:50px;
     display:flex;
-    align-items:center;
+    gap:15px;
     justify-content:center;
-    box-shadow:0 0 15px rgba(0,123,255,.8);
-    transition:.3s;
-}
-button:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 25px rgba(0,123,255,1);
 }
 
-/* icons */
-.play-icon{
-    width:0;
-    height:0;
-    border-left:14px solid white;
-    border-top:8px solid transparent;
-    border-bottom:8px solid transparent;
-}
-
-/* equalizer */
-.bars{
-    display:flex;
-    align-items:flex-end;
-    gap:4px;
-    height:22px;
-}
-.bars div{
-    width:4px;
-    height:6px;
-    background:white;
-    animation:wave .9s ease-in-out infinite;
-    border-radius:2px;
-}
-.bars div:nth-child(2){animation-delay:.1s}
-.bars div:nth-child(3){animation-delay:.2s}
-.bars div:nth-child(4){animation-delay:.3s}
-
-@keyframes wave{
-    0%{height:6px}
-    50%{height:22px}
-    100%{height:6px}
-}
-
-/* ===== light mode ===== */
-body.light{
-    background:linear-gradient(45deg,#f8f9fa,#e3f2fd,#e0f7fa,#fffde7,#fff3e0);
-}
-body.light h1{
-    color:#0066ff;
-    text-shadow:0 0 6px rgba(0,102,255,.5);
-}
-body.light .description{
-    color:#8e24aa;
-    text-shadow:0 0 6px rgba(142,36,170,.4);
-}
-body.light .container{
-    box-shadow:0 0 15px rgba(0,123,255,.3);
+.nav a{
+    padding:10px 18px;
+    border-radius:20px;
+    text-decoration:none;
+    background:rgba(255,255,255,.2);
+    color:#fff;
+    box-shadow:0 0 10px rgba(255,255,255,.4);
 }
 </style>
 </head>
 
 <body>
 
-<div class="theme-toggle" onclick="toggleTheme()">
-    <span class="sun">☀</span>
-    <span class="moon">🌙</span>
+<h1>audio play test</h1>
+<p class="desc">
+halaman ini dibuat untuk menguji fitur audio play berbasis html css dan javascript.  
+di sini kamu bisa ngetes pemutaran audio, respon tombol play, dan kestabilan suara  
+sebelum masuk ke koleksi lagu utama dengan tampilan neon modern.
+</p>
+
+<div class="audio-test">
+    <div class="card">
+        <h3>audio test 1</h3>
+        <audio controls src="audio/test1.mp3"></audio>
+    </div>
+    <div class="card">
+        <h3>audio test 2</h3>
+        <audio controls src="audio/test2.mp3"></audio>
+    </div>
+    <div class="card">
+        <h3>audio test 3</h3>
+        <audio controls src="audio/test3.mp3"></audio>
+    </div>
 </div>
 
-<h1>selamat datang di koleksi lagu</h1>
-<p class="description">nikmati lagu favorit dengan tampilan neon modern</p>
-
-<div class="containers">
-
-<div class="container">
-<img src="image/ngapainrepot.jpg">
-<h3>judul lagu 1</h3>
-<hr>
-<audio id="audio1" src="audio/ngapainrepot.mp3"></audio>
-<button onclick="togglePlay(1)"><div class="play-icon"></div></button>
+<div class="nav">
+    <a href="index.html">home</a>
+    <a href="koleksi.html">koleksi lagu</a>
+    <a href="tentang.html">tentang</a>
 </div>
-
-<div class="container">
-<img src="https://via.placeholder.com/200">
-<h3>judul lagu 2</h3>
-<hr>
-<audio id="audio2" src="audio/lagu2.mp3"></audio>
-<button onclick="togglePlay(2)"><div class="play-icon"></div></button>
-</div>
-
-</div>
-
-<script>
-let currentAudio=null;
-let currentButton=null;
-let beatInterval=null;
-
-function togglePlay(id){
-    const audio=document.getElementById("audio"+id);
-    const button=audio.nextElementSibling;
-
-    if(currentAudio && currentAudio!==audio){
-        currentAudio.pause();
-        currentAudio.currentTime=0;
-        currentButton.innerHTML='<div class="play-icon"></div>';
-        clearInterval(beatInterval);
-    }
-
-    if(audio.paused){
-        audio.play();
-        button.innerHTML='<div class="bars"><div></div><div></div><div></div><div></div></div>';
-        currentAudio=audio;
-        currentButton=button;
-
-        beatInterval=setInterval(()=>{
-            button.querySelectorAll(".bars div").forEach(bar=>{
-                bar.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
-            });
-        },120);
-
-        audio.onended=()=>{
-            button.innerHTML='<div class="play-icon"></div>';
-            clearInterval(beatInterval);
-        };
-    }else{
-        audio.pause();
-        audio.currentTime=0;
-        button.innerHTML='<div class="play-icon"></div>';
-        clearInterval(beatInterval);
-    }
-}
-
-function toggleTheme(){
-    document.body.classList.toggle("light");
-}
-</script>
 
 </body>
 </html>
