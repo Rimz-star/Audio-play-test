@@ -55,6 +55,7 @@ h1{text-shadow:0 0 12px cyan;font-size:2.6em}
     display:flex;flex-direction:column;
     justify-content:center;gap:6px;
     padding:10px;cursor:pointer;
+    z-index:10;
 }
 .menu-btn span{height:3px;background:#fff;border-radius:4px}
 .menu{
@@ -63,6 +64,7 @@ h1{text-shadow:0 0 12px cyan;font-size:2.6em}
     gap:10px;padding:15px;
     background:rgba(0,0,0,.6);
     border-radius:14px;
+    z-index:10;
 }
 .menu a{color:#fff;text-decoration:none}
 .menu.show{display:flex}
@@ -76,10 +78,10 @@ h1{text-shadow:0 0 12px cyan;font-size:2.6em}
 </div>
 
 <div class="menu" id="menu">
-<a href="index.html">Menu Awal</a>
-<a href="halaman2.html">Lagu Galau/sad</a>
-<a href="halaman3.html">Lagu Dj/remix</a>
-<a href="halaman4.html">tentang kami</a>
+<a href="index.html" onclick="closeMenu()">Menu Awal</a>
+<a href="halaman2.html" onclick="closeMenu()">Lagu Galau/sad</a>
+<a href="halaman3.html" onclick="closeMenu()">Lagu Dj/remix</a>
+<a href="halaman4.html" onclick="closeMenu()">tentang kami</a>
 </div>
 
 <h1>My music</h1>
@@ -104,7 +106,10 @@ Selamat datang di platform My Music,disini kalian bebas menggunakan music tanpa 
 
 <script>
 function toggleMenu(){
-document.getElementById("menu").classList.toggle("show");
+    document.getElementById("menu").classList.toggle("show");
+}
+function closeMenu(){
+    document.getElementById("menu").classList.remove("show");
 }
 </script>
 
