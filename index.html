@@ -6,25 +6,39 @@
 <title>My Music.ID</title>
 
 <style>
+/* ===== background hidup ===== */
 body{
     font-family:arial,sans-serif;
     min-height:100vh;
     margin:0;
     padding:30px;
-    background:linear-gradient(45deg,#1e1e2f,#2b5876,#4e4376);
-    background-size:400% 400%;
-    animation:bg 10s ease infinite;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,255,255,.25), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,0,255,.25), transparent 40%),
+        linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+    background-size:200% 200%;
+    animation:bgMove 20s ease infinite;
     color:#e0ffff;
     text-align:center;
+    overflow-x:hidden;
 }
-@keyframes bg{
+@keyframes bgMove{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
-h1{text-shadow:0 0 12px cyan;font-size:2.6em}
-.desc{max-width:720px;margin:20px auto 40px;color:#ffd6ff}
 
+h1{
+    text-shadow:0 0 15px cyan;
+    font-size:2.6em;
+}
+.desc{
+    max-width:720px;
+    margin:20px auto 40px;
+    color:#ffd6ff;
+}
+
+/* ===== cards ===== */
 .audio-test{
     display:flex;
     gap:20px;
@@ -34,73 +48,129 @@ h1{text-shadow:0 0 12px cyan;font-size:2.6em}
 .card{
     width:220px;
     background:rgba(255,255,255,.08);
-    border-radius:14px;
+    backdrop-filter:blur(8px);
+    border-radius:16px;
     padding:15px;
-    box-shadow:0 0 20px rgba(0,255,255,.4);
+    box-shadow:0 0 25px rgba(0,255,255,.35);
+    transition:.4s;
+}
+.card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 0 35px rgba(0,255,255,.7);
 }
 .card img{
     width:100%;
     aspect-ratio:1/1;
     object-fit:cover;
-    border-radius:10px;
-}
-.card p{font-size:.9em;color:#cfffff}
-
-/* hamburger */
-.menu-btn{
-    position:fixed;top:20px;left:20px;
-    width:42px;height:42px;
-    background:rgba(255,255,255,.2);
     border-radius:12px;
-    display:flex;flex-direction:column;
-    justify-content:center;gap:6px;
-    padding:10px;cursor:pointer;
-    z-index:10;
 }
-.menu-btn span{height:3px;background:#fff;border-radius:4px}
-.menu{
-    position:fixed;top:70px;left:20px;
-    display:none;flex-direction:column;
-    gap:10px;padding:15px;
-    background:rgba(0,0,0,.6);
+.card p{
+    font-size:.9em;
+    color:#cfffff;
+}
+
+/* ===== hamburger modern ===== */
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    width:46px;
+    height:46px;
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(8px);
     border-radius:14px;
-    z-index:10;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    padding:10px;
+    cursor:pointer;
+    z-index:20;
+    transition:.3s;
 }
-.menu a{color:#fff;text-decoration:none}
-.menu.show{display:flex}
+.menu-btn:hover{
+    box-shadow:0 0 20px cyan;
+}
+.menu-btn span{
+    height:3px;
+    background:#fff;
+    border-radius:4px;
+}
+
+/* ===== menu navigasi ===== */
+.menu{
+    position:fixed;
+    top:80px;
+    left:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:18px;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    transform:translateX(-120%);
+    opacity:0;
+    transition:.4s ease;
+    z-index:20;
+}
+.menu.show{
+    transform:translateX(0);
+    opacity:1;
+}
+.menu a{
+    color:#fff;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:12px;
+    background:rgba(255,255,255,.1);
+    transition:.3s;
+}
+.menu a:hover{
+    background:linear-gradient(45deg,#00f2fe,#4facfe);
+    color:#000;
+    box-shadow:0 0 15px cyan;
+}
+
+/* ===== responsive ===== */
+@media(max-width:600px){
+    h1{font-size:2.2em}
+    .card{width:90%}
+}
 </style>
 </head>
 
 <body>
 
+<!-- menu -->
 <div class="menu-btn" onclick="toggleMenu()">
 <span></span><span></span><span></span>
 </div>
 
 <div class="menu" id="menu">
-<a href="index.html" onclick="closeMenu()">Menu Awal</a>
-<a href="halaman2.html" onclick="closeMenu()">Lagu Dj/Happy</a>
-<a href="halaman3.html" onclick="closeMenu()">Lagu Galau/sad</a>
-<a href="halaman4.html" onclick="closeMenu()">tentang kami</a>
+<a href="index.html" onclick="closeMenu()">🏠 Menu Awal</a>
+<a href="halaman2.html" onclick="closeMenu()">🎧 Lagu DJ / Happy</a>
+<a href="halaman3.html" onclick="closeMenu()">💔 Lagu Galau</a>
+<a href="halaman4.html" onclick="closeMenu()">ℹ️ Tentang Kami</a>
 </div>
 
-<h1>My music</h1>
+<h1>My Music</h1>
 <p class="desc">
-Selamat datang di platform My Music,disini kalian bebas menggunakan music tanpa harus membayar 
+Selamat datang di platform My Music, disini kalian bebas menggunakan music tanpa harus membayar.
 </p>
 
 <div class="audio-test">
 <div class="card">
 <img src="image/test1.jpg">
-<p>Kenapa Harus memilih My music?,karena my music adalah sebuah platform music yang gratis tanpa iklan dan tanpa biaya sepersen pun😁.</p>
+<p>Kenapa memilih My Music? Karena gratis, tanpa iklan, dan tanpa biaya sepersen pun 😁</p>
 </div>
 <div class="card">
 <img src="image/test2.jpg">
-<p>Kami menyediakan beberapa music populer pada saat ini,dan kami juga menyediakan beberapa music yang populer pada zaman dulu.</p>
+<p>Kami menyediakan musik populer saat ini dan juga musik legendaris dari masa lalu.</p>
 </div>
 <div class="card">
 <img src="image/test3.jpg">
-<p>Kami menyediakan tempat request music untuk di pajang di platform ini agar kalian dapat dengan mudah menggunakan music tanpa kesusahan lagi.</p>
+<p>Kami menyediakan fitur request musik agar mudah digunakan semua orang.</p>
 </div>
 </div>
 
