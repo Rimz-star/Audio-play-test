@@ -92,8 +92,6 @@ body.light{
 }
 .fade-delay-1{animation-delay:.2s}
 .fade-delay-2{animation-delay:.4s}
-.fade-delay-3{animation-delay:.6s}
-.fade-delay-4{animation-delay:.8s}
 @keyframes fadeUp{
     to{opacity:1;transform:translateY(0)}
 }
@@ -172,6 +170,19 @@ button{
     100%{height:6px}
 }
 
+/* copyright */
+.copyright{
+    font-size:12px;
+    color:#555;
+    margin-top:6px;
+    text-align:center;
+    opacity:0;
+    transition:.4s;
+}
+.copyright.show{
+    opacity:1;
+}
+
 /* pagination */
 .pagination{
     margin:30px 0;
@@ -200,8 +211,8 @@ button{
 
 <div class="menu" id="menu">
 <a href="index.html" onclick="closeMenu()">menu awal</a>
-<a href="halaman2.html" onclick="closeMenu()">lagu dj/Happy</a>
-<a href="halaman3.html" onclick="closeMenu()">lagu galau/sad</a>
+<a href="halaman2.html" onclick="closeMenu()">lagu dj/happy</a>
+<a href="halaman3.html" onclick="closeMenu()">lagu galau</a>
 <a href="halaman4.html" onclick="closeMenu()">tentang kami</a>
 </div>
 
@@ -212,58 +223,45 @@ button{
 <h1 id="typing-title" class="fade-up"></h1>
 <p id="typing-desc" class="description fade-up fade-delay-1"></p>
 
-<div class="containers fade-up fade-delay-2" id="songList">
+<div class="containers fade-up fade-delay-2">
 
 <div class="container song">
 <img src="image/ngapainrepot.jpg">
-<h3>Ngapain Repot  by Toton Caribo, Wizz Baker, dan Fresly Nikijuluw</h3>
+<h3>Ngapain Repot</h3>
+<p class="copyright" id="copy1">© Toton Caribo, Wizz Baker & Fresly Nikijuluw</p>
 <audio id="audio1" src="audio/ngapainrepot.mp3"></audio>
 <button onclick="togglePlay(1)"><div class="play-icon"></div></button>
 </div>
 
 <div class="container song">
 <img src="image/wuchuantianjia.jpg">
-<h3> Wu Chuan Tian Jia by Teresa Teng </h3>
+<h3>Wu Chuan Tian Jia</h3>
+<p class="copyright" id="copy2">© Teresa Teng</p>
 <audio id="audio2" src="audio/wu cuan tian ja.mp3"></audio>
 <button onclick="togglePlay(2)"><div class="play-icon"></div></button>
 </div>
 
 <div class="container song">
 <img src="image/lagu3.jpg">
-<h3>judul lagu 3</h3>
+<h3>Judul Lagu 3</h3>
+<p class="copyright" id="copy3">© Nama Pencipta</p>
 <audio id="audio3" src="audio/lagu3.mp3"></audio>
 <button onclick="togglePlay(3)"><div class="play-icon"></div></button>
 </div>
 
-<div class="container song">
-<img src="image/lagu4.jpg">
-<h3>judul lagu 4</h3>
-<audio id="audio4" src="audio/lagu4.mp3"></audio>
-<button onclick="togglePlay(4)"><div class="play-icon"></div></button>
 </div>
-
-<div class="container song">
-<img src="image/lagu5.jpg">
-<h3>judul lagu 5</h3>
-<audio id="audio5" src="audio/lagu5.mp3"></audio>
-<button onclick="togglePlay(5)"><div class="play-icon"></div></button>
-</div>
-
-</div>
-
-<div class="pagination" id="pagination"></div>
 
 <script>
 /* typing */
 function typingText(el,text,speed,delay=0){
-    setTimeout(()=>{
-        let i=0;
-        const int=setInterval(()=>{
-            el.innerHTML+=text.charAt(i);
-            i++;
-            if(i>=text.length) clearInterval(int);
-        },speed);
-    },delay);
+setTimeout(()=>{
+let i=0;
+const int=setInterval(()=>{
+el.innerHTML+=text.charAt(i);
+i++;
+if(i>=text.length) clearInterval(int);
+},speed);
+},delay);
 }
 typingText(
 document.getElementById("typing-title"),
@@ -282,13 +280,13 @@ function toggleMenu(){
 document.getElementById("menu").classList.toggle("show");
 }
 function closeMenu(){
-    document.getElementById("menu").classList.remove("show");
+document.getElementById("menu").classList.remove("show");
 }
 function toggleTheme(){
 document.body.classList.toggle("light");
 }
 
-/* audio */
+/* audio + copyright */
 let currentAudio=null;
 let currentButton=null;
 let beatInterval=null;
@@ -296,6 +294,10 @@ let beatInterval=null;
 function togglePlay(id){
 const audio=document.getElementById("audio"+id);
 const button=audio.nextElementSibling;
+const copyright=document.getElementById("copy"+id);
+
+document.querySelectorAll(".copyright")
+.forEach(c=>c.classList.remove("show"));
 
 if(currentAudio && currentAudio!==audio){
 currentAudio.pause();
@@ -307,48 +309,30 @@ clearInterval(beatInterval);
 if(audio.paused){
 audio.play();
 button.innerHTML='<div class="bars"><div></div><div></div><div></div><div></div></div>';
+copyright.classList.add("show");
+
 currentAudio=audio;
 currentButton=button;
+
 beatInterval=setInterval(()=>{
 button.querySelectorAll(".bars div").forEach(b=>{
 b.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
 });
 },120);
+
 audio.onended=()=>{
 button.innerHTML='<div class="play-icon"></div>';
+copyright.classList.remove("show");
 clearInterval(beatInterval);
 };
 }else{
 audio.pause();
 audio.currentTime=0;
 button.innerHTML='<div class="play-icon"></div>';
+copyright.classList.remove("show");
 clearInterval(beatInterval);
 }
 }
-
-/* pagination */
-const songs=document.querySelectorAll(".song");
-const perPage=3;
-let currentPage=1;
-const totalPage=Math.ceil(songs.length/perPage);
-const pagination=document.getElementById("pagination");
-
-function showPage(page){
-currentPage=page;
-songs.forEach((s,i)=>{
-s.style.display=(i>=(page-1)*perPage && i<page*perPage)?"flex":"none";
-});
-document.querySelectorAll(".pagination button")
-.forEach((b,i)=>b.classList.toggle("active",i+1===page));
-}
-
-for(let i=1;i<=totalPage;i++){
-const btn=document.createElement("button");
-btn.innerText=i;
-btn.onclick=()=>showPage(i);
-pagination.appendChild(btn);
-}
-showPage(1);
 </script>
 
 </body>
